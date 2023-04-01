@@ -8,34 +8,49 @@ router.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './public', 'index.html'));
 });
 
-router.post('/auth', async function (req, res) {
-  const { name, password } = req.body;
-  if (name && password) {
-    try {
-      const user = await User.findOne({ where: { name, password } });
-      if (user) {
-        req.session.loggedin = true;
-        req.session.username = username;
-        res.redirect('/game');
-      } else {
-        res.send('Incorrect Username and/or Password!');
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Internal server error');
+router.post('/', async (req, res) => {
+  try {
+    const userData = await User.findOne({ where: { email: req.body.email } });
+
+    if (!userData) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+      return;
     }
-  } else {
-    res.send('Please enter Username and Password!');
+
+    const validPassword = await userData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+      return;
+    }
+
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+      
+      res.json({ user: userData, message: 'You are now logged in!' });
+    });
+
+  } catch (err) {
+    res.status(400).json(err);
   }
 });
 
+
 router.get('/game', (req, res) => {
-  if (req.session.loggedin) {
-    res.send('Welcome back, ' + req.session.username + '!');
-  } else {
-    res.send('Please login to view this page!');
+  if (req.session.logged_in) {
+    res.sendFile(path.join(__dirname, './public', 'game.html'));
+  } 
+
+  else {
+    alert('please login');
   }
 });
+
 
 router.get('/signup', (req, res) => {
   res.sendFile(path.join(__dirname, './public', 'signup.html'));

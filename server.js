@@ -43,8 +43,8 @@ io.on('connection', function (socket) {
   // create a new player and add it to our players object
   const newPlayer = Player.create({
     rotation: 0,
-    x: Math.floor(Math.random() * 700) + 50,
-    y: Math.floor(Math.random() * 500) + 50,
+    x: 10,
+    y: 10,
     playerId: socket.id,
   });
   players[socket.id] = newPlayer;

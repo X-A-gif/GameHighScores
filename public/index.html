@@ -14,22 +14,23 @@
     <div class="container1 relative">
         <div class="login">
 			<h1>Login</h1>
-			<form action="/auth" method="post">
-				<label for="username">
-					<!-- font awesome icon -->
-					<i class="fas fa-user"></i>
-				</label>
-				<input type="text" name="username" placeholder="Username" id="username" required>
-				<label for="password">
-					<i class="fas fa-lock"></i>
-				</label>
-				<input type="password" name="password" placeholder="Password" id="password" required>
-				<input type="submit" value="Login">
-			</form>
+		    <form class="form login-form">
+				<div class="form-group">
+				  <label for="email-login">email:</label>
+				  <input class="form-input" type="text" id="email-login" />
+				</div>
+				<div class="form-group">
+				  <label for="password-login">password:</label>
+				  <input class="form-input" type="password" id="password-login" />
+				</div>
+				<div class="form-group">
+				  <button class="btn btn-primary" type="submit">login</button>
+				</div>
+			  </form>
 		</div>
     </div>
 
-    <!-- <script src="./js/login.js"></script> -->
+    <script type="module" src="./js/login.js"></script>
 
 </body>
 </html>
