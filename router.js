@@ -57,10 +57,18 @@ router.get('/signup', (req, res) => {
 });
 
 router.post('/signup', async (req, res) => {
-  const { username, password } = req.body;
+  console.log(req.body)
+  //const { username, email, password } = req.body;
   try {
-    const user = await User.create({ username, password });
+    const user = await User.create(req.body);
     res.json({ message: 'account created' });
+    req.session.save(() => {
+      //req.session.user_id = user.id;
+      req.session.logged_in = true;
+      res.status(200).json(user);
+     // res.json({ user: user.name, message: 'You are now logged in!' });
+    });
+    //res.redirect('/game')
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal server error');
