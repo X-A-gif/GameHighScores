@@ -24,7 +24,14 @@
                     Create Account
                 </h2>
 
-                <form class="mt-10" method="POST">
+                <form class="mt-10 signup-form" method="POST">
+                    <label for="name" class="block text-xs font-semibold text-gray-600 uppercase">name</label>
+                    <input id="name" type="name" name="name" placeholder="name" autocomplete="name"
+                        class="block w-full py-3 px-1 mt-2 
+                        text-gray-800 appearance-none 
+                        border-b-2 border-gray-100
+                        focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                        required />
                     <label for="email" class="block text-xs font-semibold text-gray-600 uppercase">email</label>
                     <input id="email" type="email" name="email" placeholder="e-mail address" autocomplete="email"
                         class="block w-full py-3 px-1 mt-2 
@@ -55,7 +62,7 @@
         </div>
     </div>
 
-    <script src="./js/login.js"></script>
+    <script src="./js/signup.js"></script>
 
 </body>
 </html>
