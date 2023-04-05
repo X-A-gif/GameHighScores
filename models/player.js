@@ -1,40 +1,59 @@
 const { Model, DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
-class Player extends Model {}
+class User extends Model {
+  checkPassword(loginPw) {
+    return bcrypt.compareSync(loginPw, this.password);
+  }
+}
 
-Player.init(
+User.init(
   {
-    rotation: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    x: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    y: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    userId: {
+    id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
-    },  
-    level: {
-      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
       allowNull: false,
-      primaryKey: true
-    }  
+      unique: true,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [8],
+      },
+    },
   },
   {
+    hooks: {
+      beforeCreate: async (newUserData) => {
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        return newUserData;
+      },
+      beforeUpdate: async (updatedUserData) => {
+        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        return updatedUserData;
+      },
+    },
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'player'
+    modelName: 'user',
   }
 );
 
-module.exports = Player;
+module.exports = User;
