@@ -1,6 +1,5 @@
 const signUpFormHandler = async (event) => {
   event.preventDefault();
-  alert("signup clicked")
   // Collect values from the login form
   const name = document.querySelector('#name').value.trim();
   const email = document.querySelector('#email').value.trim();
@@ -15,10 +14,8 @@ const signUpFormHandler = async (event) => {
     });
     
     if (response.ok) {
-      console.log("in response.ok true")
       document.location.replace('/game');
     } else {
-      console.log(response.statusText)
       alert(response.statusText);
     }
   }

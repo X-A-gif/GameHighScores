@@ -8,7 +8,7 @@ const router = express.Router();
  // res.sendFile(path.join(__dirname, './public', 'index.html'));
 //});
 
-router.post('/', async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
 
@@ -68,7 +68,7 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/signup', (req, res) => {
-  console.log('in signup get route')
+  console.log('in signup get route', req.session.logged_in)
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     res.redirect('/game');
@@ -93,6 +93,7 @@ router.post('/signup', async (req, res) => {
     res.status(400).json(err);
   }
 });
+
 
 router.use((req, res) => {
   res.status(404).end();

@@ -51,39 +51,7 @@ app.use('/', router);
 
 
 
-io.on('connection', function (socket) {
-  console.log('a user connected');
-  // create a new player and add it to our players object
-  const newPlayer = Player.create({
-    rotation: 0,
-    x: 10,
-    y: 10,
-    playerId: socket.id,
-  });
-  players[socket.id] = newPlayer;
-  // send the players object to the new player
-  socket.emit('currentPlayers', players);
-  // update all other players of the new player
-  socket.broadcast.emit('newPlayer', newPlayer);
-  // when a player disconnects, remove them from our players object
-  socket.on('disconnect', function () {
-    console.log('user disconnected');
-    // remove this player from our players object and the database
-    Player.destroy({ where: { playerId: socket.id } });
-    delete players[socket.id];
-    // emit a message to all players to remove this player
-    io.emit('player-disconnect', socket.id);
-  });
-  socket.on('playerMovement', function (movementData) {
-    players[socket.id].x = movementData.x;
-    players[socket.id].y = movementData.y;
-    players[socket.id].rotation = movementData.rotation;
-    // save the player's data to the database
-    players[socket.id].save();
-    // emit a message to all players about the player that moved
-    socket.broadcast.emit('playerMoved', players[socket.id]);
-  });
-});
+
   
 
 sequelize.sync().then(() => {
