@@ -4,9 +4,9 @@ const path = require('path');
 const User = require('./models/user');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './public', 'index.html'));
-});
+//router.get('/', (req, res) => {
+ // res.sendFile(path.join(__dirname, './public', 'index.html'));
+//});
 
 router.post('/', async (req, res) => {
   try {
@@ -52,8 +52,30 @@ router.get('/game', (req, res) => {
 });
 
 
+//router.get('/signup', (req, res) => {
+ // res.sendFile(path.join(__dirname, './public', 'signup.html'));
+//});
+
+router.get('/login', (req, res) => {
+  console.log('in login get route')
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.redirect('/game');
+    return;
+  }
+
+  res.render('login');
+});
+
 router.get('/signup', (req, res) => {
-  res.sendFile(path.join(__dirname, './public', 'signup.html'));
+  console.log('in signup get route')
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.redirect('/game');
+    return;
+  }
+
+  res.render('signup');
 });
 
 router.post('/signup', async (req, res) => {
@@ -66,6 +88,7 @@ router.post('/signup', async (req, res) => {
 
       res.status(200).json(userData);
     });
+    console.log(req.session.id)
   } catch (err) {
     res.status(400).json(err);
   }
