@@ -4,15 +4,15 @@ const loginFormHandler = async (event) => {
   // Collect values from the login form
   const email = document.querySelector('#email-login').value.trim();
   const password = document.querySelector('#password-login').value.trim();
-
+  console.log("")
   if (email && password) {
     // Send a POST request to the API endpoint
-    const response = await fetch('/', {
+    const response = await fetch('/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
       headers: { 'Content-Type': 'application/json' },
     });
-
+    console.log("got the response", response)
     if (response.ok) {
       // If successful, redirect the browser to the profile page
       document.location.replace('/game');
