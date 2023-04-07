@@ -24,6 +24,7 @@ function preload ()
   this.load.image('background', 'assets/invadersbg.png');
   this.load.image('ship', 'assets/spaceShips_001.png');
   this.load.image('bullet', 'assets/bullet.png');
+  this.load.image('invader', 'assets/invader1.png');
 }
 
 let ship;
@@ -55,8 +56,8 @@ function create ()
   });
 
   createBullets.call(this);
+  createEnemy.call(this);
 
-  // set up the spacebar input
   let spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
   spacebar.on('down', fireBullet, this);
 
@@ -69,6 +70,8 @@ function createBullets() {
   });
 }
 
+let bullets;
+
 function fireBullet() {
   let bullet = bullets.get(ship.x, ship.y - ship.height / 2);
   if (bullet) {
@@ -77,7 +80,7 @@ function fireBullet() {
     bullet.setScale(0.5); 
     bullet.setVelocityY(-400);
     this.time.addEvent({
-      delay: 2000,
+      delay: 1000,
       callback: function() {
         bullet.setActive(false);
         bullet.setVisible(false);
@@ -88,8 +91,42 @@ function fireBullet() {
   }
 }
 
+let enemy;
+
+function createEnemy() {
+  enemy = this.physics.add.sprite(game.config.width / 2, 50, 'invader');
+  enemy.setScale(0.3);
+  enemy.setCollideWorldBounds(true);
+  
+  this.time.addEvent({
+    delay: 5000,
+    loop: true,
+    callback: function() {
+      fireEnemyBullet.call(this);
+    },
+    callbackScope: this
+  });
+
+}
+
+function fireEnemyBullet() {
+  let bullet = bullets.get(enemy.x, enemy.y + enemy.height / 2);
+  
+  if (bullet) {
+    bullet.setActive(true);
+    bullet.setVisible(true);
+    bullet.setScale(0.5); 
+    bullet.setVelocityY(50);
+    this.physics.add.collider(bullet, ship, function() {
+      bullet.setActive(false);
+      bullet.setVisible(false);
+      bullet.setVelocity(0, 0);
+    });
+    
+  }
+}
 function update ()
 {
 }
 
-let bullets;
+
