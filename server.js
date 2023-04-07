@@ -1,10 +1,11 @@
 const express = require('express');
 const session = require('express-session');
+const exphbs = require('express-handlebars');
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server);
-
+const helpers = require('./utils/helpers');
 
 const mysql = require('mysql2');
 const path = require('path');
@@ -25,12 +26,22 @@ const Player = sequelize.define('player', {
   playerId: DataTypes.STRING
 });
 
-
+const hbs = exphbs.create({ helpers });
 app.use(session({
     secret : 'secret123',
     resave : true,
     saveUninitialized : true
 }));
+
+app.engine('handlebars', exphbs({
+  layoutsDir: __dirname + '/views/layouts',
+  }));
+app.set('view engine', 'handlebars');
+
+app.get('/', (req, res) => {
+  //Serves the body of the page aka "homepage.handlebars" to the container //aka "main.handlebars"
+  res.render('homepage', {layout : 'main'});
+  });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -38,39 +49,9 @@ app.use(express.static(path.join(__dirname, './public')));
 
 app.use('/', router);
 
-io.on('connection', function (socket) {
-  console.log('a user connected');
-  // create a new player and add it to our players object
-  const newPlayer = Player.create({
-    rotation: 0,
-    x: 10,
-    y: 10,
-    playerId: socket.id,
-  });
-  players[socket.id] = newPlayer;
-  // send the players object to the new player
-  socket.emit('currentPlayers', players);
-  // update all other players of the new player
-  socket.broadcast.emit('newPlayer', newPlayer);
-  // when a player disconnects, remove them from our players object
-  socket.on('disconnect', function () {
-    console.log('user disconnected');
-    // remove this player from our players object and the database
-    Player.destroy({ where: { playerId: socket.id } });
-    delete players[socket.id];
-    // emit a message to all players to remove this player
-    io.emit('player-disconnect', socket.id);
-  });
-  socket.on('playerMovement', function (movementData) {
-    players[socket.id].x = movementData.x;
-    players[socket.id].y = movementData.y;
-    players[socket.id].rotation = movementData.rotation;
-    // save the player's data to the database
-    players[socket.id].save();
-    // emit a message to all players about the player that moved
-    socket.broadcast.emit('playerMoved', players[socket.id]);
-  });
-});
+
+
+
   
 
 sequelize.sync().then(() => {
