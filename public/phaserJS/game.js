@@ -23,6 +23,7 @@ function preload ()
 {
   this.load.image('background', 'assets/invadersbg.png');
   this.load.image('ship', 'assets/spaceShips_001.png');
+  this.load.image('bullet', 'assets/bullet.png');
 }
 
 let ship;
@@ -53,8 +54,42 @@ function create ()
     ship.setVelocityX(0);
   });
 
+  createBullets.call(this);
+
+  // set up the spacebar input
+  let spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+  spacebar.on('down', fireBullet, this);
+
+}
+
+function createBullets() {
+  bullets = this.physics.add.group({
+    defaultKey: 'bullet',
+    maxSize: 5
+  });
+}
+
+function fireBullet() {
+  let bullet = bullets.get(ship.x, ship.y - ship.height / 2);
+  if (bullet) {
+    bullet.setActive(true);
+    bullet.setVisible(true);
+    bullet.setScale(0.5); 
+    bullet.setVelocityY(-400);
+    this.time.addEvent({
+      delay: 2000,
+      callback: function() {
+        bullet.setActive(false);
+        bullet.setVisible(false);
+        bullet.setVelocity(0, 0);
+      },
+      callbackScope: this
+    });
+  }
 }
 
 function update ()
 {
 }
+
+let bullets;
