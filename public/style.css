@@ -16,8 +16,8 @@ body {
   
 }
 .login h1 {
-    text-align: center;
-    color: #5b6574;
+    text-align: left;
+    color: white;
     font-size: 24px;
     padding: 20px 0 20px 0;
     border-bottom: 1px solid #dee0e4;
@@ -56,4 +56,21 @@ body {
 .login form input[type="submit"]:hover {
   background-color: #2868c7;
     transition: background-color 0.2s;
+}
+
+  .btn-primary {
+    background-color: white;
+    border: none;
+    color: #2868c7;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.Sign-Up {
+    text-align: left;
+    color: white;
+    font-size: 16px;
 }
