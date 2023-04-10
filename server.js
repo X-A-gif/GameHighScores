@@ -6,6 +6,7 @@ const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server);
 const helpers = require('./utils/helpers');
+const routes = require('./controllers');
 
 const mysql = require('mysql2');
 const path = require('path');
@@ -47,7 +48,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, './public')));
 
+app.use(routes)
 app.use('/', router);
+
 
 
 
