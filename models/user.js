@@ -36,6 +36,10 @@ User.init(
         len: [8],
       },
     },
+    max_score: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
   },
   {
     hooks: {

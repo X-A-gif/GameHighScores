@@ -1,7 +1,31 @@
 const router = require('express').Router();
-const { Project, User } = require('../models');
+const { User, Player, Profile } = require('../models');
 const withAuth = require('../utils/auth');
 console.log("hello")
+
+router.get('/', async (req, res) => {
+    console.log("checking I ran");
+    try {
+      // Find the logged in user based on the session ID
+      const userData = await User.findAll({
+        attributes: { exclude: ['password', 'email'] },
+      });
+
+ console.log(userData);
+
+const users = userData.map((user)=> user.get({ plain: true }));
+
+//console.log("user", user);
+
+res.render('homepage', {
+  users,
+});
+} catch (err) {
+res.status(500).json(err);
+}
+});
+
+
 router.get('/login', (req, res) => {
     console.log('in login get route in homeroutes')
     // If the user is already logged in, redirect the request to another route
@@ -9,9 +33,9 @@ router.get('/login', (req, res) => {
       res.redirect('/game');
       return;
     }
-  
+
     res.render('login');
-  });
+    });
 
   router.get('/signup', (req, res) => {
   console.log('in signup get route in homeroutes')
@@ -22,7 +46,7 @@ router.get('/login', (req, res) => {
   }
 
   res.render('signup');
-});
+    });
 
 router.get('/game', (req, res) => {
   console.log('in game get route in homeroutes')
@@ -32,22 +56,26 @@ router.get('/game', (req, res) => {
   }
 
   res.render('game');
-});
+    });
 
- // router.post('/signup', async (req, res) => {
-  //try {
-   // const userData = await User.create(req.body);
 
-   // req.session.save(() => {
-    //  req.session.user_id = userData.id;
-    //  req.session.logged_in = true;
+router.get('/profile', withAuth, async (req, res) => {
+        try {
+          // Find the logged in user based on the session ID
+          const userData = await User.findByPk(req.session.user_id,{
+          attributes: { exclude: ['password','email'] },
+        });
+    
+        const user = userData.get({ plain: true });
+    
+        res.render('profile', {
+          user,
+          logged_in: true
+        });
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    });
 
-     // res.status(200).json(userData);
-   // });
-   // console.log(req.session.id)
-//  } catch (err) {
-//    res.status(400).json(err);
- // }
-//});
-  
-  module.exports = router;
+
+module.exports = router;
