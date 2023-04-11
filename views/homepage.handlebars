@@ -1,1 +1,41 @@
 <h1>in the body of homepage</h1>
+
+    <table id="table" >
+<tr>
+    <th>User ID</th>
+    <th>User Display Name</th>
+    <th>User's High Score</th>
+</tr>
+
+{{#each users as |user| }}
+<p> "hello checking </p>
+
+<tr>
+    <td>{{user.id}}</td>
+    <td>{{user.name}}</td>
+    <td>{{user.max_score}}</td>
+</tr>
+{{/each}}
+</table>
+
+<div class="row">
+  <div class="col-auto">
+    <h2>Welcome to the Arcade !</h2>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-6">
+    <h3>Check out the Highest Scores !!</h3>
+
+{{!-- {{#each users as |user|}}
+    <div class="row mb-2">
+      <div class="col-md-8">
+        <h4><a href="/profile/{{user.id}}">{{user.name}}</a></h4>
+      </div>
+    </div>
+    {{/each}} --}}
+  </div>    
+</div>
+  
+<script src="./js/profile.js"></script>

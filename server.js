@@ -39,10 +39,10 @@ app.engine('handlebars', exphbs({
   }));
 app.set('view engine', 'handlebars');
 
-app.get('/', (req, res) => {
-  //Serves the body of the page aka "homepage.handlebars" to the container //aka "main.handlebars"
-  res.render('homepage', {layout : 'main'});
-  });
+// app.get('/', (req, res) => {
+//   //Serves the body of the page aka "homepage.handlebars" to the container //aka "main.handlebars"
+//   res.render('homepage', {layout : 'main'});
+//   });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -51,11 +51,6 @@ app.use(express.static(path.join(__dirname, './public')));
 app.use(routes)
 app.use('/', router);
 
-
-
-
-
-  
 
 sequelize.sync().then(() => {
   server.listen(PORT, () => {
