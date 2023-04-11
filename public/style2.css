@@ -1,0 +1,11 @@
+body {
+    background-image: url('https://futurefive.co.nz/uploads/story/2021/08/20/Space_Invaders_Invincible_061.webp');
+}
+
+.centered {
+    text-align: center;
+  }
+  
+  .color-red {
+    color: red;
+  }
