@@ -6,12 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./style.css">
+        <script type="text/javascript" src="./phaserJS/phaser.min.js"></script>
     <title>Space Invaders</title>
   </head>
   <body>
    <nav>
-    <a href="/login">Login</a> or <a href="/signup">Sign up</a>
+        {{#if logged_in}}
+          <a href="/profile">profile</a> | <a href="/">Homepage</a> | <a href="/game">Game</a> |
+          <button class="no-button" id="logout">logout</button>
+        {{else}}
+          <a href="/login">Login</a> or <a href="/signup">Sign up</a>
+        {{/if}}
    </nav>
     {{{body}}}
+   {{#if logged_in}}
+      <script src="/js/logout.js"></script>
+  {{/if}}
   </body>
   </html>

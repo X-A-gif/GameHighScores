@@ -13,91 +13,91 @@ router.get('/', (req, res) => {
   }
 });
 
-router.post('/login', async (req, res) => {
-  try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
+//router.post('/login', async (req, res) => {
+  //try {
+   // const userData = await User.findOne({ where: { email: req.body.email } });
 
-    if (!userData) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
-      return;
-    }
+   // if (!userData) {
+   //   res
+   //     .status(400)
+   //     .json({ message: 'Incorrect email or password, please try again' });
+   //   return;
+   // }
 
-    const validPassword = await userData.checkPassword(req.body.password);
+   // const validPassword = await userData.checkPassword(req.body.password);
 
-    if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
-      return;
-    }
+   // if (!validPassword) {
+   //  res
+   //     .status(400)
+   //     .json({ message: 'Incorrect email or password, please try again' });
+   //   return;
+  //  }
 
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
+  //  req.session.save(() => {
+   //   req.session.user_id = userData.id;
+   //   req.session.logged_in = true;
       
-      res.json({ user: userData, message: 'You are now logged in!' });
-    });
+  //    res.json({ user: userData, message: 'You are now logged in!' });
+  //  });
 
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
+ // } catch (err) {
+ //   res.status(400).json(err);
+ // }
+//});
 
 
-router.get('/game', (req, res) => {
-  if (req.session.logged_in) {
-    res.sendFile(path.join(__dirname, './public', 'game.html'));
-  } 
+//router.get('/game', (req, res) => {
+//  if (req.session.logged_in) {
+//    res.sendFile(path.join(__dirname, './public', 'game.html'));
+//  } 
 
-  else {
-    alert('please login');
-  }
-});
+//  else {
+//    alert('please login');
+ // }
+//});
 
 
 //router.get('/signup', (req, res) => {
  // res.sendFile(path.join(__dirname, './public', 'signup.html'));
 //});
 
-router.get('/login', (req, res) => {
-  console.log('in login get route')
+//router.get('/login', (req, res) => {
+//  console.log('in login get route')
   // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
-    res.redirect('/game');
-    return;
-  }
+//  if (req.session.logged_in) {
+//    res.redirect('/game');
+//    return;
+//  }
 
-  res.render('login');
-});
+//  res.render('login');
+//});
 
-router.get('/signup', (req, res) => {
-  console.log('in signup get route', req.session.logged_in)
+//router.get('/signup', (req, res) => {
+ // console.log('in signup get route', req.session.logged_in)
   // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
-    res.redirect('/game');
-    return;
-  }
+ // if (req.session.logged_in) {
+  //  res.redirect('/game');
+   // return;
+  //}
 
-  res.render('signup');
-});
+  //res.render('signup');
+//});
 
-router.post('/signup', async (req, res) => {
-  try {
-    const userData = await User.create(req.body);
+//router.post('/signup', async (req, res) => {
+  //try {
+    //const userData = await User.create(req.body);
 
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
+    //req.session.save(() => {
+     // req.session.user_id = userData.id;
+    //  req.session.logged_in = true;
 
-      res.status(200).json(userData);
-    });
-    console.log(req.session.id)
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
+      //res.status(200).json(userData);
+    //});
+    //console.log(req.session.id)
+  //} catch (err) {
+    //res.status(400).json(err);
+ // }
+//});
 
 
 router.use((req, res) => {
