@@ -39,10 +39,10 @@ app.engine('handlebars', exphbs({
   }));
 app.set('view engine', 'handlebars');
 
-app.get('/', (req, res) => {
+//app.get('/', (req, res) => {
   //Serves the body of the page aka "homepage.handlebars" to the container //aka "main.handlebars"
-  res.render('homepage', {layout : 'main'});
-  });
+ // res.render('homepage', {layout : 'main'});
+ // });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
