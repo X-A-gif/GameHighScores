@@ -18,43 +18,168 @@ var config = {
 
 
 let game = new Phaser.Game(config);
+let enemies;
+let ship;
+let bullets;
+let enemyBullets;
+let score = 0;
 
-function preload ()
-{
+function preload() {
   this.load.image('background', 'assets/invadersbg.png');
   this.load.image('ship', 'assets/spaceShips_001.png');
+  this.load.image('bullet', 'assets/bullet.png');
+  this.load.image('invader', 'assets/invader1.png');
 }
 
-let ship;
-
-function create ()
-{
+function create() {
   let background = this.add.image(game.config.width / 2, game.config.height / 2, 'background');
   background.setOrigin(0.5, 0.5);
 
-  ship = this.physics.add.sprite(game.config.width / 2, game.config.height - 100, 'ship');
-  ship.setScale(0.5, -0.5);
-  ship.setOrigin(0.5, 1);
+  createShip.call(this);
+  createEnemies.call(this);
+  createEnemyBullets.call(this);
   
-  ship.setCollideWorldBounds(true);
+  this.physics.add.collider(this.bullets, enemies, function(bullet, enemy) {
+    enemy.disableBody(true, true); 
+    score += 10; 
+    console.log(score);
+  });
+}
+
+function createShip() {
+  this.ship = this.physics.add.sprite(game.config.width / 2, game.config.height - 100, 'ship');
+  this.ship.setScale(0.5, -0.5);
+  this.ship.setOrigin(0.5, 1);
+  this.ship.setCollideWorldBounds(true);
 
   let cursors = this.input.keyboard.createCursorKeys();
 
-  cursors.left.on('down', function() {
-    ship.setVelocityX(-200);
+  cursors.left.on('down', () => {
+    this.ship.setVelocityX(-200);
   });
-  cursors.right.on('down', function() {
-    ship.setVelocityX(200);
+  cursors.right.on('down', () => {
+    this.ship.setVelocityX(200);
   });
-  cursors.left.on('up', function() {
-    ship.setVelocityX(0);
+  cursors.left.on('up', () => {
+    this.ship.setVelocityX(0);
   });
-  cursors.right.on('up', function() {
-    ship.setVelocityX(0);
+  cursors.right.on('up', () => {
+    this.ship.setVelocityX(0);
   });
 
+  createBullets.call(this);
+
+  let spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+  spacebar.on('down', fireBullet, this);
 }
 
-function update ()
-{
+function createBullets() {
+  this.bullets = this.physics.add.group({
+    defaultKey: 'bullet',
+    maxSize: 100
+  });
+}
+
+function createEnemyBullets() {
+  this.enemyBullets = this.physics.add.group({
+    defaultKey: 'bullet',
+    maxSize: 100
+  });
+}
+
+
+function fireBullet() {
+  let bullet = this.bullets.get(this.ship.x, this.ship.y - this.ship.height / 2);
+  if (bullet) {
+    bullet.setActive(true);
+    bullet.setVisible(true);
+    bullet.setScale(0.5); 
+    bullet.setVelocityY(-400);
+    this.time.addEvent({
+      delay: 1000,
+      callback: function() {
+        bullet.setActive(false);
+        bullet.setVisible(false);
+        bullet.setVelocity(0, 0);
+      },
+      callbackScope: this
+    });
+  }
+}
+
+function createEnemies() {
+  enemies = this.physics.add.group(); 
+  enemyBullets = this.physics.add.group({
+    defaultKey: 'bullet',
+    maxSize: 100
+  });
+
+  const formationWidth = 10;
+  const formationHeight = 4;
+  const startX = (game.config.width - formationWidth * 50) / 2;
+  const startY = 50;
+
+  for (let i = 0; i < formationWidth * formationHeight; i++) {
+    const x = startX + (i % formationWidth) * 50;
+    const y = startY + Math.floor(i / formationWidth) * 50;
+
+    let enemy = enemies.create(x, y, 'invader');
+    enemy.setScale(0.3);
+    enemy.setCollideWorldBounds(true);
+
+    let bulletTimer;
+
+    this.time.addEvent({
+      delay: Phaser.Math.Between(5000, 50000),
+      loop: true,
+      callback: function() {
+        if (bulletTimer && bulletTimer.getProgress() < 1) {
+          return;
+        }
+
+        if (enemy.active) { 
+          let bullet = enemyBullets.get(enemy.x, enemy.y + enemy.height / 2);
+
+          if (bullet) {
+            bullet.setActive(true);
+            bullet.setVisible(true);
+            bullet.setScale(0.5); 
+            bullet.setVelocityY(25);
+
+            bulletTimer = this.time.addEvent({
+              delay: Phaser.Math.Between(10000, 20000),
+              callback: function() {
+                bullet.setActive(false);
+                bullet.setVisible(false);
+                bullet.setVelocity(0, 0);
+              },
+              callbackScope: this
+            });
+          }
+        }
+      },
+      callbackScope: this
+    });
+  }
+}
+
+
+
+// function fireEnemyBullet(enemy) {
+//   let bullet = bullets.get(enemy.x, enemy.y + enemy.height / 2);
+//   if (bullet) {
+//     bullet.setActive(true);
+//     bullet.setVisible(true);
+//     bullet.setScale(0.5);
+//     let speed = Phaser.Math.Between(200, 400);
+//     let angle = Phaser.Math.Between(0, 360);
+//     let vx = speed * Math.cos(angle);
+//     let vy = speed * Math.sin(angle);
+//     bullet.setVelocity(vx, vy);
+//   }
+// }
+
+
+function update() {
+  
 }
