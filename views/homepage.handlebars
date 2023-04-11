@@ -1,14 +1,22 @@
-<h1>in the body of homepage</h1>
+<div class="row">
+  <div class="col-auto">
+    <h2>Welcome {{user.name}} !! to the Arcade !</h2>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-6">
+    <h3>Check out the Highest Scores !!</h3>
 
     <table id="table" >
 <tr>
-    <th>User ID</th>
-    <th>User Display Name</th>
-    <th>User's High Score</th>
+    <th>UserID</th>
+    <th>UserName</th>
+    <th>HighScore</th>
 </tr>
 
 {{#each users as |user| }}
-<p> "hello checking </p>
+
 
 <tr>
     <td>{{user.id}}</td>
@@ -18,23 +26,6 @@
 {{/each}}
 </table>
 
-<div class="row">
-  <div class="col-auto">
-    <h2>Welcome to the Arcade !</h2>
-  </div>
-</div>
-
-<div class="row mt-4">
-  <div class="col-md-6">
-    <h3>Check out the Highest Scores !!</h3>
-
-{{!-- {{#each users as |user|}}
-    <div class="row mb-2">
-      <div class="col-md-8">
-        <h4><a href="/profile/{{user.id}}">{{user.name}}</a></h4>
-      </div>
-    </div>
-    {{/each}} --}}
   </div>    
 </div>
   
