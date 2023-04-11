@@ -11,12 +11,16 @@
   </head>
   <body>
    <nav>
-    <p> <a href="/login">Login</a> </p>
-    
-    <p> <a href="/signup">Singup</a> </p>
-    
-    <p> <a href="/profile">Check Max Scores</a> </p>
+        {{#if logged_in}}
+          <a href="/profile">profile</a> | <a href="/">Homepage</a> | <a href="/game">Game</a> |
+          <button class="no-button" id="logout">logout</button>
+        {{else}}
+          <a href="/login">Login</a> or <a href="/signup">Sign up</a>
+        {{/if}}
    </nav>
     {{{body}}}
+   {{#if logged_in}}
+      <script src="/js/logout.js"></script>
+  {{/if}}
   </body>
   </html>

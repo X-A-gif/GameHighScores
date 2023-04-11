@@ -55,8 +55,43 @@ router.get('/game', (req, res) => {
    return;
   }
 
-  res.render('game');
+  //res.render('game');
+
+  res.render('game', {
+    logged_in: req.session.logged_in
+  });
+
+});
+
+
+//********************************************************************************** */
+router.get('/', async (req, res) => {
+  console.log("In the new homepage route")
+  try {
+    // Get all projects and JOIN with user data
+    //const projectData = await Project.findAll({
+      //include: [
+       // {
+       //   model: User,
+       //   attributes: ['name'],
+       // },
+     // ],
+   // });
+
+    // Serialize data so the template can read it
+    //const projects = projectData.map((project) => project.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
+   
+    console.log(req.session.logged_in)
+    res.render('homepage', { 
+     // projects, 
+      logged_in: req.session.logged_in 
     });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
 router.get('/profile', withAuth, async (req, res) => {
