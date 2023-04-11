@@ -52,11 +52,6 @@ app.use(routes)
 app.use('/', router);
 
 
-
-
-
-  
-
 sequelize.sync().then(() => {
   server.listen(PORT, () => {
     console.log(`Server running on port localhost:3001`);
