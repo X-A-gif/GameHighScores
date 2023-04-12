@@ -4,7 +4,6 @@ const exphbs = require('express-handlebars');
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
-const io = require('socket.io')(server);
 const helpers = require('./utils/helpers');
 const routes = require('./controllers');
 
@@ -15,17 +14,6 @@ const router = require('./router');
 const PORT = process.env.PORT || 3001;
 
 const sequelize = require('./config/connection');
-const { DataTypes } = require('sequelize');
-
-const players = {};
-
-
-const Player = sequelize.define('player', {
-  rotation: DataTypes.FLOAT,
-  x: DataTypes.INTEGER,
-  y: DataTypes.INTEGER,
-  playerId: DataTypes.STRING
-});
 
 const hbs = exphbs.create({ helpers });
 app.use(session({
@@ -39,19 +27,13 @@ app.engine('handlebars', exphbs({
   }));
 app.set('view engine', 'handlebars');
 
-//app.get('/', (req, res) => {
-  //Serves the body of the page aka "homepage.handlebars" to the container //aka "main.handlebars"
- // res.render('homepage', {layout : 'main'});
- // });
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, './public')));
 
 app.use(routes)
 app.use('/', router);
-
-
+  
 sequelize.sync().then(() => {
   server.listen(PORT, () => {
     console.log(`Server running on port localhost:3001`);

@@ -42,6 +42,8 @@ router.post('/signup', async (req, res) => {
         req.session.logged_in = true;
         
         res.json({ user: userData, message: 'You are now logged in!' });
+
+        console.log(req.session)
       });
   
     } catch (err) {
@@ -58,6 +60,29 @@ router.post('/signup', async (req, res) => {
       res.status(404).end();
     }
   });
+
+  router.put('/user', async (req, res) => {
+    try {
+      console.log("session_id", req.session.user_id)
+      const { score } = req.body;
+      const user = await User.findByPk(req.session.user_id);
+  
+      if (user) {
+        const { max_score } = user;
+        if (score > max_score) {
+          user.max_score = score;
+          await user.save();
+        }
+        res.status(200).json({ success: true });
+      } else {
+        res.status(404).json({ error: 'User not found' });
+      }
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
+  
 
 
 
