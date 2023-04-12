@@ -1,29 +1,48 @@
 <!-- Beginning Of Added Code !-->
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space Invaders Profile</title>
-    <link rel="stylesheet" href="./style3.css" />
-</head>
-<body>
+
+    
+
+    <script src="./js/profile.js"></script>
+
+<!-- End Of Added Code !-->
+ <div class="flex h-screen z-1">
+          <!-- Sidebar -->
+          <div class="bg-gray-900 text-gray-100 flex flex-col justify-between w-64">
+            <div class="px-4 py-8">
+              <h1 class="text-2xl font-bold">Games</h1>
+            </div>
+            <nav class="flex-grow">
+              <ul class="px-4">
+                <li class="mb-2">
+                  <a href="/game" class="block p-2 rounded hover:bg-gray-800">SpaceInvaders 1</a>
+                </li>
+           
+              </ul>
+            </nav>
+            <div class="px-4 py-8">
+              <p class="text-gray-500">Sidebar footer</p>
+            </div>
+          </div>
+
+          <!-- Main content -->
+          <div class="flex-grow bg-gray-100 p-4">
+              <div class="Scores">
+      <!-- Need appropriate links to high and user scores-->
+
     <header>
-        <nav>
             <ul>
               <!-- Make sure the game.handlebars is being properly called in "Play Game" li !-->
                 <li>User Name:{{user.name}}</li>
                 <li>User ID:{{user.id}}</li>
                 <li>High Score:{{user.max_score}}</li>
-                <li><a href="/views/game.handlebars">Play Game</a></li>
             </ul>
-        </nav>
     </header>
 
     <main>
         <section class="profile">
-            <h1>Space Invaders Profile</h1>
+            <h1 class="text-slate-400">Space Invaders</h1>
             <div>
                        <img
             src="https://cdn.vox-cdn.com/thumbor/UlWAyVQAoOfZTDTtNDXB5-GhY0U=/106x0:760x436/1820x1213/filters:focal(106x0:760x436):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/1956155/screen_shot_2012-09-12_at_12.12.43_pm.0.png"
@@ -46,8 +65,5 @@
     <footer>
         <p>&copy; 2023 Space Invaders Profile. All rights reserved.</p>
     </footer>
-    <script src="./js/profile.js"></script>
-</body>
-</html>
-
-<!-- End Of Added Code !-->
+          </div>
+        </div>
