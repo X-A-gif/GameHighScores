@@ -16,7 +16,7 @@ const signUpFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/game');
     } else {
-      alert(response.statusText);
+      document.getElementById('errorMSG').textContent = "Inproper email or password"
     }
   }
 };

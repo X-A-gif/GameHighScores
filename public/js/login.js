@@ -17,7 +17,7 @@ const loginFormHandler = async (event) => {
       // If successful, redirect the browser to the profile page
       document.location.replace('/game');
     } else {
-      alert(response.statusText);
+      document.getElementById('errorMSG').textContent = "Invalid email or password"
     }
   }
 };
