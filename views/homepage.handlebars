@@ -1,48 +1,64 @@
+<div class="flex h-screen z-1">
+          <!-- Sidebar -->
+          <div class="bg-gray-900 text-gray-100 flex flex-col justify-between w-64">
+            <div class="px-4 py-8">
+              <h1 class="text-2xl font-bold">Games</h1>
+            </div>
+            <nav class="flex-grow">
+              <ul class="px-4">
+                <li class="mb-2">
+                  <a href="/game" class="block p-2 rounded hover:bg-gray-800">SpaceInvaders 1</a>
+                </li>
+           
+              </ul>
+            </nav>
+            <div class="px-4 py-8">
+              <p class="text-gray-500">Sidebar footer</p>
+            </div>
+          </div>
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
+          <div class="flex-grow bg-gray-100 p-4">
+              <div class="Scores">
 
-    <title>Welcome to Space Invaders</title>
-  </head>
-  <body>
-    <div class="container1 relative h-screen w-screen z-0">
-      <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <div class="row">
+                <div class="col-auto">
+                  <h2>Welcome {{user.name}} !! to the Arcade !</h2>
+                </div>
+              </div>
 
-<div class="row">
-  <div class="col-auto">
-    <h2>Welcome {{user.name}} !! to the Arcade !</h2>
-  </div>
-</div>
+              <div class="row mt-4">
+                <div class="col-md-6">
+                  <h3>Check out the Highest Scores !!</h3>
 
-<div class="row mt-4">
-  <div class="col-md-6">
-    <h3>Check out the Highest Scores !!</h3>
+                  <table id="table" >
+              <tr>
+                  <th>UserID</th>
+                  <th>UserName</th>
+                  <th>HighScore</th>
+              </tr>
 
-    <table id="table" >
-<tr>
-    <th>UserID</th>
-    <th>UserName</th>
-    <th>HighScore</th>
-</tr>
-
-{{#each users as |user| }}
+              {{#each users as |user| }}
 
 
-<tr>
-    <td>{{user.id}}</td>
-    <td>{{user.name}}</td>
-    <td>{{user.max_score}}</td>
-</tr>
-{{/each}}
-</table>
+              <tr>
+                  <td>{{user.id}}</td>
+                  <td>{{user.name}}</td>
+                  <td>{{user.max_score}}</td>
+              </tr>
+              {{/each}}
+              </table>
 
-  </div>    
-</div>
- </div>
-    </div> 
+                </div>    
+              </div>
+
+            <footer>
+                <p>&copy; 2023 Space Invaders Profile. All rights reserved.</p>
+            </footer>
+          </div>
+        </div>
+
+
+
+
+  
 <script src="./js/profile.js"></script>
