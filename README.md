@@ -35,6 +35,10 @@ This Project is licensed under the MIT license.
 The initial contributors of this repo were [X-A-gif](https://github.com/X-A-gif), [michaeloc1](https://github.com/michaeloc1), [ruchiagarwal26](https://github.com/ruchiagarwal26), [FreeWill201](https://github.com/FreeWill201), and [Olloyd321](https://github.com/Olloyd321).
 Contributions welcome
 
+
+[Please find a walkthrough video of the application running locally](https://user-images.githubusercontent.com/119633009/231571448-9b056992-9ea9-4867-a654-9a9372818627.mp4)
+
+
 ## Requirements 
 
 The requirements that were set out at the beginning of this project are as follows - 
