@@ -1,26 +1,53 @@
-<div class="row">
-  <div class="col-auto">
-    <h2>Welcome, {{user.name}}!</h2>
-  </div>
-</div>
+<!-- Beginning Of Added Code !-->
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Invaders Profile</title>
+    <link rel="stylesheet" href="./style3.css" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+              <!-- Make sure the game.handlebars is being properly called in "Play Game" li !-->
+                <li>User Name:{{user.name}}</li>
+                <li>User ID:{{user.id}}</li>
+                <li>High Score:{{user.max_score}}</li>
+                <li><a href="/views/game.handlebars">Play Game</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<div class="container1 relative">
-        <div class="profile">
-			<h1>
-             Highest Scores
-            </h1>
-		</div>      
-   
+    <main>
+        <section class="profile">
+            <h1>Space Invaders Profile</h1>
             <div>
-                <p>
-                   Your User ID : {{user.id}} <br>
-                   Your User Name :  {{user.name}} <br>
-                   Your Highest Score :  {{user.max_score}}
-                </p>
+                       <img
+            src="https://cdn.vox-cdn.com/thumbor/UlWAyVQAoOfZTDTtNDXB5-GhY0U=/106x0:760x436/1820x1213/filters:focal(106x0:760x436):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/1956155/screen_shot_2012-09-12_at_12.12.43_pm.0.png"
+            height="300"
+            width="400"
+            alt="Space Invaders game image"
+          />
             </div>
+            <div>
+                <ul>
+                    <li><strong>Developer:</strong> Taito Corporation</li>
+                    <li><strong>Release Date:</strong> June 1978</li>
+                    <li><strong>Platform:</strong> Arcade, Atari 2600, Nintendo Entertainment System, and more</li>
+                    <li><strong>Gameplay:</strong> Players control a ship that moves from side to side at the bottom of the screen, shooting at alien enemies that descend from the top of the screen.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
 
-            <button id="fastBTN">click</button>
-		
-    </div>
-  <script src="./js/profile.js"></script>
+    <footer>
+        <p>&copy; 2023 Space Invaders Profile. All rights reserved.</p>
+    </footer>
+    <script src="./js/profile.js"></script>
+</body>
+</html>
+
+<!-- End Of Added Code !-->
