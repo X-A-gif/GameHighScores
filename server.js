@@ -16,10 +16,20 @@ const PORT = process.env.PORT || 3001;
 const sequelize = require('./config/connection');
 
 const hbs = exphbs.create({ helpers });
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 app.use(session({
-    secret : 'secret123',
-    resave : true,
-    saveUninitialized : true
+  secret: 'secret123',
+  cookie: {
+    maxAge: 1000*60*60*30,
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict',
+  },
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
 }));
 
 app.engine('handlebars', exphbs({
