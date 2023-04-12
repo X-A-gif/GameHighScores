@@ -7,15 +7,15 @@
         <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./style.css">
         <script type="text/javascript" src="./phaserJS/phaser.min.js"></script>
-    <title>Space Invaders</title>
+    <title>Space Invaders Logout Screen</title>
   </head>
   <body>
    <nav>
         {{#if logged_in}}
-          <a href="/profile">profile</a> | <a href="/">Homepage</a> | <a href="/game">Game</a> |
+          <a href="/views/profile.handlebars">profile</a> | <a href="/views/homepage.handlebars">Homepage</a> | <a href="/views/game.handlebars">Game</a> |
           <button class="no-button" id="logout">logout</button>
         {{else}}
-          <a href="/login">Login</a> or <a href="/signup">Sign up</a>
+          <a href="/views/login.handlebars">Login</a> or <a href="/views/signup.handlebars">Sign up</a>
         {{/if}}
    </nav>
     {{{body}}}
