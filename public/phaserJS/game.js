@@ -23,6 +23,8 @@ let ship;
 let bullets;
 let enemyBullets;
 let score = 0;
+let scoreText; 
+
 
 function preload() {
   this.load.image('background', 'assets/invadersbg.png');
@@ -38,12 +40,9 @@ function create() {
   createShip.call(this);
   createEnemies.call(this);
   createEnemyBullets.call(this);
-  
-  this.physics.add.collider(this.bullets, enemies, function(bullet, enemy) {
-    enemy.disableBody(true, true); 
-    score += 10; 
-    console.log(score);
-  });
+
+  scoreText = this.add.text(10, 10, 'Score: 0', { fontSize: '32px', fill: '#FFF' });
+
 }
 
 function createShip() {
@@ -163,23 +162,51 @@ function createEnemies() {
   }
 }
 
-
-
-// function fireEnemyBullet(enemy) {
-//   let bullet = bullets.get(enemy.x, enemy.y + enemy.height / 2);
-//   if (bullet) {
-//     bullet.setActive(true);
-//     bullet.setVisible(true);
-//     bullet.setScale(0.5);
-//     let speed = Phaser.Math.Between(200, 400);
-//     let angle = Phaser.Math.Between(0, 360);
-//     let vx = speed * Math.cos(angle);
-//     let vy = speed * Math.sin(angle);
-//     bullet.setVelocity(vx, vy);
-//   }
-// }
+let scoreWritten = false
 
 
 function update() {
-  
+  this.physics.add.collider(this.bullets, enemies, function(bullet, enemy) {
+      enemy.disableBody(true, true); 
+      score += 10; 
+      scoreText.setText('Score: ' + score); 
+  });
+
+  if (score >= 100 && !scoreWritten) {
+    gameOver(score);
+    scoreWritten = true;
+  }
 }
+
+const gameOver = async (score) => {
+  const response = await fetch (`/api/users/user`, {
+      method: 'PUT',
+      body: JSON.stringify({ score: score }),
+      headers: {
+          'Content-Type' : 'application/json',
+      },
+  })
+
+  if(response.ok) {
+      console.log("wooohoooo");
+  }
+
+  else {
+      console.log("darn");
+  }
+}
+
+// console.log('Game Over');
+// fetch('/api/user', {
+//   method: 'PUT',
+//   headers: {
+//     'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify({ score: score })
+// })
+// .then(response => {
+//   res.json(response)
+
+// })
+// .catch(error => {
+// });

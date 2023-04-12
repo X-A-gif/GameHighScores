@@ -8,7 +8,7 @@ const profileFormHandler = async (event) => {
 
     const response = await fetch (`/api/users/profile`, {
         method: 'POST',
-        body: JSON.stringyfy({
+        body: JSON.stringify({
             id,
             name,
             max_score,
@@ -30,4 +30,6 @@ if(response.ok){
     .addEventListener('submit', profileFormHandler);
   
   };
-  
+
+
+
