@@ -1,4 +1,4 @@
-# SocketPhaserGame
+# GameHighScores
 ![licenseBadge](https://img.shields.io/badge/License-MIT-red)
 
 ## Description 
