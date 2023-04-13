@@ -24,7 +24,7 @@ npm i
 
 ## Usage 
 
-This application is a game that is designed to be user interactive and engaging replication of.
+This application is a game that is designed to be user interactive and engaging replication of The classic SPACE INVADERS Game.
 
 ## License 
   
