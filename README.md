@@ -24,7 +24,7 @@ npm i
 
 ## Usage 
 
-This application is a game that is designed to be user interactive and engaging.
+This application is a game that is designed to be user interactive and engaging replication of.
 
 ## License 
   
@@ -32,6 +32,26 @@ This Project is licensed under the MIT license.
 
 ## Contributing
 
+The initial contributors of this repo were [X-A-gif](https://github.com/X-A-gif), [michaeloc1](https://github.com/michaeloc1), [ruchiagarwal26](https://github.com/ruchiagarwal26), [FreeWill201](https://github.com/FreeWill201), and [Olloyd321](https://github.com/Olloyd321).
+Contributions welcome
+
+
+[Please find a walkthrough video of the application running locally](https://user-images.githubusercontent.com/119633009/231571448-9b056992-9ea9-4867-a654-9a9372818627.mp4)
+
+
+## Requirements 
+
+The requirements that were set out at the beginning of this project are as follows - 
+```
+Must use Node.js and Express.js to create a RESTful API
+Must use Handlebars.js as the template engine
+Must use MySQL and the Sequelize ORM for the database
+Must have both GET and POST routes for retrieving and adding new data
+Must use at least one new library, package, or technology that we haven’t discussed
+Must have a folder structure that meets the MVC paradigm
+Must include authentication (express-session and cookies) 
+Must protect API keys and sensitive information with environment variables
+```
 
 
 ## Tests
@@ -44,6 +64,5 @@ npm test
 
 ## Questions
 
-For any questions on this project please email , or contact me on github[](https://github.com//)] below.
-To view more of my projects visit [](https://github.com//).
+For any questions on this project please email , or contact us on [github](https://github.com//)] below.
 
