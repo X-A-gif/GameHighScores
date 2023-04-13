@@ -36,8 +36,7 @@ The initial contributors of this repo were [X-A-gif](https://github.com/X-A-gif)
 Contributions welcome
 
 
-[Please find a walkthrough video of the application running locally](https://user-images.githubusercontent.com/119633009/231571448-9b056992-9ea9-4867-a654-9a9372818627.mp4)
-
+[Please find a walkthrough video of the application running locally](https://user-images.githubusercontent.com/119633009/231624325-87afcff6-3486-43fa-a88f-4541eeb332fc.mp4)
 
 ## Requirements 
 
@@ -61,6 +60,8 @@ To perform tests run the following command:
 ```
 npm test
 ```
+
+
 
 ## Questions
 
