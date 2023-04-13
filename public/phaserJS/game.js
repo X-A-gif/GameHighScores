@@ -172,7 +172,7 @@ function update() {
       scoreText.setText('Score: ' + score); 
   });
 
-  if (score >= 100 && !scoreWritten) {
+  if (score >= 400 && !scoreWritten) {
     gameOver(score);
     scoreWritten = true;
   }
