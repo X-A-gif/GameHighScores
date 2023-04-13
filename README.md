@@ -61,7 +61,7 @@ To perform tests run the following command:
 npm test
 ```
 
-## Plans for development
+## Plans for future development
 
 Plans for future development include - expanding game library, alternative games that could also work in this format are [Missile Command](https://en.wikipedia.org/wiki/Missile_Command), [Galaga](https://en.wikipedia.org/wiki/Galaga), 
 and [Defender](https://en.wikipedia.org/wiki/Defender_(1981_video_game)), as well as improving spaceInvadersGame to enhance user experience.
