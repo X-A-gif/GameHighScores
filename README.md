@@ -63,7 +63,8 @@ npm test
 
 ## Plans for development
 
-Plans for future development include - expanding game library, alternatice games that could also work in this format are [Missle Command](https://en.wikipedia.org/wiki/Missile_Command), [Galaga](https://en.wikipedia.org/wiki/Galaga), and [Defender](https://en.wikipedia.org/wiki/Defender_(1981_video_game), as well as improving spaceInvadersGame to enhance user experience.
+Plans for future development include - expanding game library, alternatice games that could also work in this format are [Missle Command](https://en.wikipedia.org/wiki/Missile_Command), [Galaga](https://en.wikipedia.org/wiki/Galaga), 
+and [Defender](https://en.wikipedia.org/wiki/Defender_(1981_video_game)), as well as improving spaceInvadersGame to enhance user experience.
 
 ## Questions
 
